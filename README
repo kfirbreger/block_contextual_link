@@ -1,0 +1,3 @@
+#Block Contextual Link
+
+This is a simple drupal 6 module that adds the configure link to blocks, the way that drupal 7 does with contextual links. In the admin settings page it is possible to determine the size of the gear image, as well as which image to use and extra classes you might want to add to it. The gear button links to the configuration page of the block the mouse is currently hovering over.
