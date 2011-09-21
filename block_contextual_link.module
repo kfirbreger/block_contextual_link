@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * Implementation of hook_init
+ */
+function block_contextual_link_init() {
+  // Test if the user has the right to edit block
+  // access right is administer blocks
+  // Add the needed js to do it
+  if (user_access('administer blocks')) {
+    // Adding the image information from settings
+    drupal_add_js(array('block_contextual_link' => array(
+      'src' => variable_get('block_contextual_link_image', '/' . drupal_get_path('module', 'block_contextual_link') . '/gear.png'),
+      'width' => variable_get('block_contextual_link_width', 24),
+      'height' => variable_get('block_contextual_link_height', 24),
+      'class' => variable_get('block_contextual_link_class', 'block_contextual_link_image')
+      )), 'setting');
+    // Adding js and css
+    drupal_add_js(drupal_get_path('module', 'block_contextual_link') . '/block_contextual_link.js');
+    drupal_add_css(drupal_get_path('module', 'block_contextual_link') . '/block_contextual_link.css');
+  }
+}
+
+/**
+ * Implementation of hook_menu
+ */
+function block_contextual_link_menu() {
+  $items = array();
+  $items['admin/settings/block-contextual-menu'] = array(
+    'title' => 'Block contextual link settings',
+    'description' => 'Set the image and its size used by the block contextual link module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('block_contextual_link_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+/**
+ * Admin settings form
+ */
+function block_contextual_link_settings() {
+  $form = array();
+  $form['block_contextual_link_src'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Gear image to use'),
+    '#default_value' => variable_get('block_contextual_link_src', '/' . drupal_get_path('module', 'block_contextual_link') . '/gear.png'),
+  );
+  $form['block_contextual_link_width'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Image width'),
+    '#default_value' => variable_get('block_contextual_link_width', 24),
+  );
+  $form['block_contextual_link_height'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Image height'),
+    '#default_value' => variable_get('block_contextual_link_height', 24),
+  );
+  $form['block_contextual_link_class'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Extra class to add to image'),
+    '#default_value' => variable_get('block_contextual_link_class', 'block_contextual_link_image'),
+  );
+  return system_settings_form($form);
+}

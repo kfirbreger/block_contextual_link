@@ -1,0 +1,4 @@
+name = Block Contextual Link
+description = Adds the ability to configure a block directly from the display of that block. Similar to Drupal 7 contextual links
+core = 6.x
+package = Development

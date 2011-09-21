@@ -1,0 +1,16 @@
+.block_contextual_link_button {
+    background-color: #4A5054;
+    margin: 0;
+    padding: 2px;
+    border: 0;
+    float: right;
+    position: relative;
+    right: 0;
+    line-height: 1;
+}
+
+.block_contextual_link_image {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
